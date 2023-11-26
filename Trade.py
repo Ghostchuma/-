@@ -1,5 +1,9 @@
 import json
 import random
+import argparse
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Валютний Трейдер")
+    parser.add_argument("--cli", action="store_true", help="Запустити командний рядок (CLI)")
 
 class ВалютнийТрейдер:
     def __init__(self):
@@ -92,7 +96,7 @@ if __name__ == "__main__":
 ⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿ ⣿⣿⣿⣿⣿⣿⠃
 
         ''')
-    print("Валютного Трейдер готовий до роботи!")
+    print("Валютного Трейдер ШРЕК готовий до роботи!")
 
     print("Для початку роботи введіть будь-який символ.")
 
@@ -134,7 +138,8 @@ if __name__ == "__main__":
             else:
                 print("Невірна команда. Використовуйте: SELL <сума>")
         elif дія == "RESTART":
-            трейдер.load_state()
+            del трейдер
+            трейдер = ВалютнийТрейдер()
             print("Гра перезапущена.")
         elif дія == "COMMANDS":
             print(трейдер.get_commands())
