@@ -2,14 +2,6 @@ import json
 import random
 import argparse
 import os
-
-if __name__ == "__main__":
-    script_directory = os.path.dirname(os.path.abspath(__file__))
-    os.chdir(script_directory)
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Валютний Трейдер")
-    parser.add_argument("--RATE", "--AVAILABLE", "--BUY", "--SELL", "--NEXT", "--RESTART", "--COMMANDS", action="store_true", help="Запустити командний рядок")
-
 class ВалютнийТрейдер:
     def __init__(self):
         self.load_config()
@@ -84,8 +76,42 @@ class ВалютнийТрейдер:
         EXIT - завершити програму
         COMMANDS - вивести список команд
         """
-
 if __name__ == "__main__":
+    script_directory = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(script_directory)
+    parser = argparse.ArgumentParser(description="Валютний Трейдер")
+    parser.add_argument("--RATE", action="store_true", help="Отримати поточний обмінний курс")
+    parser.add_argument("--AVAILABLE", action="store_true", help="Отримати залишок балансів")
+    parser.add_argument("--BUY", type=float, help="Купити долари за вказаною сумою")
+    parser.add_argument("--SELL", type=float, help="Продати долари за вказаною сумою")
+    parser.add_argument("--NEXT", action="store_true", help="Оновити обмінний курс")
+    parser.add_argument("--RESTART", action="store_true", help="Перезапустити гру")
+    parser.add_argument("--COMMANDS", action="store_true", help="Вивести список команд")
+
+    args = parser.parse_args()
+
+    трейдер = ВалютнийТрейдер()
+
+    if args.RATE:
+        print(трейдер.get_rate())
+    elif args.AVAILABLE:
+        print(трейдер.get_balances())
+    elif args.BUY is not None:
+        print(трейдер.buy(args.BUY))
+    elif args.SELL is not None:
+        print(трейдер.sell(args.SELL))
+    elif args.NEXT:
+        трейдер.update_rate()
+        print(трейдер.get_rate())
+    elif args.RESTART:
+        del трейдер
+        трейдер = ВалютнийТрейдер()
+        print("Програма перезапущена.")
+    elif args.COMMANDS:
+        print(трейдер.get_commands())
+    else:
+        print("Введіть коректну команду. Використовуйте --COMMANDS для виведення списку команд.")
+
     print ('''⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀
 ⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀
 ⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈ ⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆
@@ -111,59 +137,45 @@ if __name__ == "__main__":
 
     print(трейдер.get_commands())
 
-    while True:
-        команда = input("\nВведіть команду: ").split()
-        дія = команда[0].upper()
+    # while True:
+    #     команда = input("\n Введіть команду: ").split()
+    #     дія = команда[0].upper()
 
-        if дія == "EXIT":
-            break
-        elif дія == "NEXT":
-            трейдер.update_rate()
-            print(трейдер.get_rate())
-        elif дія == "RATE":
-            print(трейдер.get_rate())
-        elif дія == "AVAILABLE":
-            print(трейдер.get_balances())
-        elif дія == "BUY":
-            if len(команда) == 2:
-                try:
-                    сума = float(команда[1])
-                    print(трейдер.buy(сума))
-                except ValueError:
-                    print("Невірна сума. Будь ласка, введіть правильне число.")
-            else:
-                print("Невірна команда. Використовуйте: BUY <сума>")
-        elif дія == "SELL":
-            if len(команда) == 2:
-                try:
-                    сума = float(команда[1])
-                    print(трейдер.sell(сума))
-                except ValueError:
-                    print("Невірна сума. Будь ласка, введіть правильне число.")
-            else:
-                print("Невірна команда. Використовуйте: SELL <сума>")
-        elif дія == "RESTART":
-            del трейдер
-            трейдер = ВалютнийТрейдер()
-            print("Гра перезапущена.")
-        elif дія == "COMMANDS":
-            print(трейдер.get_commands())
-        else:
-            print("Невірна команда. Введіть 'EXIT', щоб завершити програму.")
-
-
+    #     if дія == "EXIT":
+    #         break
+    #     elif дія == "NEXT":
+    #         трейдер.update_rate()
+    #         print(трейдер.get_rate())
+    #     elif дія == "RATE":
+    #         print(трейдер.get_rate())
+    #     elif дія == "AVAILABLE":
+    #         print(трейдер.get_balances())
+    #     elif дія == "BUY":
+    #         if len(команда) == 2:
+    #             try:
+    #                 сума = float(команда[1])
+    #                 print(трейдер.buy(сума))
+    #             except ValueError:
+    #                 print("Невірна сума. Будь ласка, введіть правильне число.")
+    #         else:
+    #             print("Невірна команда. Використовуйте: BUY <сума>")
+    #     elif дія == "SELL":
+    #         if len(команда) == 2:
+    #             try:
+    #                 сума = float(команда[1])
+    #                 print(трейдер.sell(сума))
+    #             except ValueError:
+    #                 print("Невірна сума. Будь ласка, введіть правильне число.")
+    #         else:
+    #             print("Невірна команда. Використовуйте: SELL <сума>")
+    #     elif дія == "RESTART":
+    #         del трейдер
+    #         трейдер = ВалютнийТрейдер()
+    #         print("Програма перезапущена.")
+    #     elif дія == "COMMANDS":
+    #         print(трейдер.get_commands())
+    #     else:
+    #         print("Невірна команда. Введіть 'EXIT', щоб завершити програму.")
 
 
 
-
-
-############################################################
-
-#             import os
-
-# config_path = os.path.join(script_directory, "config.json")
-
-# with open(config_path, "r") as config_file:
-#     config = json.load(config_file)
-# https://stackoverflow.com/questions/7783308/os-path-dirname-file-returns-empty
-# getcwd()
