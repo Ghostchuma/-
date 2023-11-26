@@ -145,20 +145,4 @@ if __name__ == "__main__":
             print(трейдер.get_commands())
         else:
             print("Невірна команда. Введіть 'EXIT', щоб завершити програму.")
-
-
-
-
-
-
-
-############################################################
-
-#             import os
-
-# config_path = os.path.join(script_directory, "config.json")
-
-# with open(config_path, "r") as config_file:
-#     config = json.load(config_file)
-# https://stackoverflow.com/questions/7783308/os-path-dirname-file-returns-empty
-# getcwd()
+            
