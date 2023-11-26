@@ -1,9 +1,14 @@
 import json
 import random
 import argparse
+import os
+
+if __name__ == "__main__":
+    script_directory = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(script_directory)
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Валютний Трейдер")
-    parser.add_argument("--RATE', 'AVAILABLE','BUY <сума>', 'SELL <сума>', 'NEXT', 'RESTART', 'COMMANDS' ", action="store_true", help="Запустити командний рядок")
+    parser.add_argument("--RATE", "--AVAILABLE", "--BUY", "--SELL", "--NEXT", "--RESTART", "--COMMANDS", action="store_true", help="Запустити командний рядок")
 
 class ВалютнийТрейдер:
     def __init__(self):
@@ -145,4 +150,20 @@ if __name__ == "__main__":
             print(трейдер.get_commands())
         else:
             print("Невірна команда. Введіть 'EXIT', щоб завершити програму.")
-            
+
+
+
+
+
+
+
+############################################################
+
+#             import os
+
+# config_path = os.path.join(script_directory, "config.json")
+
+# with open(config_path, "r") as config_file:
+#     config = json.load(config_file)
+# https://stackoverflow.com/questions/7783308/os-path-dirname-file-returns-empty
+# getcwd()
