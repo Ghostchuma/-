@@ -3,7 +3,7 @@ import random
 import argparse
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Валютний Трейдер")
-    parser.add_argument("--start", action="store_true", help="Запустити командний рядок (start)")
+    parser.add_argument("--RATE', 'AVAILABLE','BUY <сума>', 'SELL <сума>', 'NEXT', 'RESTART', 'COMMANDS' ", action="store_true", help="Запустити командний рядок")
 
 class ВалютнийТрейдер:
     def __init__(self):
