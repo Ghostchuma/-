@@ -72,7 +72,7 @@ class ВалютнийТрейдер:
         AVAILABLE - отримати залишок балансів
         BUY <сума> - купити долари за вказаною сумою
         SELL <сума> - продати долари за вказаною сумою
-        RESTART - перезапустити гру
+        RESTART - перезапустити програму
         EXIT - завершити програму
         COMMANDS - вивести список команд
         """
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     parser.add_argument("--BUY", type=float, help="Купити долари за вказаною сумою")
     parser.add_argument("--SELL", type=float, help="Продати долари за вказаною сумою")
     parser.add_argument("--NEXT", action="store_true", help="Оновити обмінний курс")
-    parser.add_argument("--RESTART", action="store_true", help="Перезапустити гру")
+    parser.add_argument("--RESTART", action="store_true", help="Перезапустити програму")
     parser.add_argument("--COMMANDS", action="store_true", help="Вивести список команд")
 
     args = parser.parse_args()
@@ -137,45 +137,45 @@ if __name__ == "__main__":
 
     print(трейдер.get_commands())
 
-    # while True:
-    #     команда = input("\n Введіть команду: ").split()
-    #     дія = команда[0].upper()
+    while True:
+        команда = input("\n Введіть команду: ").split()
+        дія = команда[0].upper()
 
-    #     if дія == "EXIT":
-    #         break
-    #     elif дія == "NEXT":
-    #         трейдер.update_rate()
-    #         print(трейдер.get_rate())
-    #     elif дія == "RATE":
-    #         print(трейдер.get_rate())
-    #     elif дія == "AVAILABLE":
-    #         print(трейдер.get_balances())
-    #     elif дія == "BUY":
-    #         if len(команда) == 2:
-    #             try:
-    #                 сума = float(команда[1])
-    #                 print(трейдер.buy(сума))
-    #             except ValueError:
-    #                 print("Невірна сума. Будь ласка, введіть правильне число.")
-    #         else:
-    #             print("Невірна команда. Використовуйте: BUY <сума>")
-    #     elif дія == "SELL":
-    #         if len(команда) == 2:
-    #             try:
-    #                 сума = float(команда[1])
-    #                 print(трейдер.sell(сума))
-    #             except ValueError:
-    #                 print("Невірна сума. Будь ласка, введіть правильне число.")
-    #         else:
-    #             print("Невірна команда. Використовуйте: SELL <сума>")
-    #     elif дія == "RESTART":
-    #         del трейдер
-    #         трейдер = ВалютнийТрейдер()
-    #         print("Програма перезапущена.")
-    #     elif дія == "COMMANDS":
-    #         print(трейдер.get_commands())
-    #     else:
-    #         print("Невірна команда. Введіть 'EXIT', щоб завершити програму.")
+        if дія == "EXIT":
+            break
+        elif дія == "NEXT":
+            трейдер.update_rate()
+            print(трейдер.get_rate())
+        elif дія == "RATE":
+            print(трейдер.get_rate())
+        elif дія == "AVAILABLE":
+            print(трейдер.get_balances())
+        elif дія == "BUY":
+            if len(команда) == 2:
+                try:
+                    сума = float(команда[1])
+                    print(трейдер.buy(сума))
+                except ValueError:
+                    print("Невірна сума. Будь ласка, введіть правильне число.")
+            else:
+                print("Невірна команда. Використовуйте: BUY <сума>")
+        elif дія == "SELL":
+            if len(команда) == 2:
+                try:
+                    сума = float(команда[1])
+                    print(трейдер.sell(сума))
+                except ValueError:
+                    print("Невірна сума. Будь ласка, введіть правильне число.")
+            else:
+                print("Невірна команда. Використовуйте: SELL <сума>")
+        elif дія == "RESTART":
+            del трейдер
+            трейдер = ВалютнийТрейдер()
+            print("Програма перезапущена.")
+        elif дія == "COMMANDS":
+            print(трейдер.get_commands())
+        else:
+            print("Невірна команда. Введіть 'EXIT', щоб завершити програму.")
 
 
 
